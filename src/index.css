@@ -1,0 +1,106 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  body {
+    cursor: none !important; /* Hide native cursor so our obnoxious giant cursor takes over */
+    font-family: 'Comic Sans MS', 'Comic Neue', cursive, sans-serif;
+    background-color: #39FF14;
+    overflow-x: hidden;
+  }
+  
+  * {
+    cursor: none !important; /* Ensure child elements don't get regular cursor */
+  }
+}
+
+/* Eye-Melting Color Shifts & Strobe Animations */
+@keyframes bgEpileptic {
+  0% { background-color: #39FF14; }
+  20% { background-color: #FF007F; }
+  40% { background-color: #FFFF00; }
+  60% { background-color: #00F0FF; }
+  80% { background-color: #FF5F00; }
+  100% { background-color: #39FF14; }
+}
+
+.animate-strobe-background {
+  animation: bgEpileptic 4s linear infinite;
+}
+
+@keyframes textGlowVibrate {
+  0% { text-shadow: 2px 2px #FF007F, -2px -2px #00F0FF; }
+  50% { text-shadow: -3px 3px #FFFF00, 3px -3px #FF00FF; }
+  100% { text-shadow: 2px 2px #FF007F, -2px -2px #00F0FF; }
+}
+
+.glow-vibrate {
+  animation: textGlowVibrate 0.2s infinite;
+}
+
+@keyframes spinSlow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.spin-slow {
+  animation: spinSlow 20s linear infinite;
+}
+
+/* Jumble and Invert Transformations */
+.upside-down-text {
+  transform: rotate(180deg);
+  display: inline-block;
+}
+
+.shake-violently {
+  animation: shake 0.12s infinite;
+}
+
+@keyframes shake {
+  0%, 100% { transform: translate(0, 0) rotate(0deg); }
+  25% { transform: translate(-4px, 4px) rotate(-3deg); }
+  50% { transform: translate(4px, -3px) rotate(3deg); }
+  75% { transform: translate(-3px, -4px) rotate(-1deg); }
+}
+
+/* Marquee infinite scrolls */
+@keyframes marqueeLeft {
+  0% { transform: translateX(0%); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes marqueeRight {
+  0% { transform: translateX(-50%); }
+  100% { transform: translateX(0%); }
+}
+
+.marquee-track-left {
+  display: flex;
+  width: 200%;
+  animation: marqueeLeft 12s linear infinite;
+}
+
+.marquee-track-right {
+  display: flex;
+  width: 200%;
+  animation: marqueeRight 14s linear infinite;
+}
+
+/* Obnoxious Scrollbar */
+::-webkit-scrollbar {
+  width: 26px;
+}
+::-webkit-scrollbar-track {
+  background: #FF007F;
+  border: 4px solid #FFFF00;
+}
+::-webkit-scrollbar-thumb {
+  background: #39FF14;
+  border: 4px dotted #00F0FF;
+  border-radius: 12px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF0000;
+}
