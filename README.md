@@ -1,80 +1,97 @@
-# 🌽🚜 AGRI-QUANTUM™ v9.8.4b | Subsurface Rhizosphere AI Portal
+# InvoiceIQ ⚡
 
-> **Official Enterprise Portal for Autonomous Photosynthetic Matrix Calibration & Crop Entanglement**  
-> *Certified under USDA Bio-Quantum Accord & ISO-9002-CROP standards.*
+> **Tagline:** *"Inbox to payment, with humans only where judgment is needed"*
 
----
-
-## 🌾 Overview
-
-**AGRI-QUANTUM™** is a single-page web application built with **React.js** and **Tailwind CSS**. On the surface, it masquerades as a cutting-edge, peer-reviewed agronomy telemetry suite featuring real-time non-photochemical quenching calculations, Arbuscular Mycorrhizal Fungi (AMF) glomalin dynamics, and diazotrophic nitrogenase kinetics.
-
-Under the hood, it is engineered to be an intentionally irritating and unusable prank web portal designed to baffle, frustrate, and amuse unsuspecting users.
+InvoiceIQ is an autonomous accounts payable (AP) automation platform designed to ingest vendor invoices, perform deterministic 3-way matching and compliance checks, auto-post clean submissions to the ERP general ledger, and isolate high-risk or ambiguous invoices for human approval.
 
 ---
 
-## ⚡ Prank Features & Chaotic UX
+## 🏗️ Architecture & Technology Stack
 
-### 1. 🌈 Eye-Melting Visual Chaos
-- **Clashing Neon Palette**: Electric lime green (`#39FF14`), hot pink (`#FF007F`), neon yellow (`#FFFF00`), and screaming cyan (`#00F0FF`).
-- **Nauseating Background Strobe**: Dynamic keyframe animation cycling through high-saturation hues with periodic screen invert glitch flashes. Includes a button to toggle strobe mode (*which may or may not succeed*).
-- **Competing Marquees**: Dual stacked banners at the top and sticky banners at the bottom scrolling in opposing directions with alerts like:
-  - `"QUANTUM SOIL CALIBRATING... DO NOT BLINK..."`
-  - `"WARNING: NITROGEN OVERLOAD DETECTED IN QUADRANT 7B"`
-  - `"TRACTOR FIRMWARE OUT OF DATE: INSERT 3.5\" FLOPPY DISK"`
-
-### 2. 🏃 Unclickable & Evasive Buttons
-- **Proximity-Activated Evasion**: Action buttons (*"SUBMIT SOIL SAMPLE"*, *"GENERATE CROP ADVISORY"*, *"INSTANT HARVEST ADVISORY"*) track cursor distance. As the user approaches within 90px, the buttons leap across the viewport with spring audio and taunts (*"TOO SLOW, FARMER!"*, *"MISSED BY AN ACRE!"*).
-- **Auditory Punishment & Form Wipe**: Any button clicked triggers a piercing 3400Hz Web Audio API square-wave screech and saw-wave error buzzer, while instantly wiping all form inputs.
-
-### 3. 🚨 Relentless Annoying Popups (Hydra Modal Engine)
-- Every 4 to 6.5 seconds, unclosable panic alerts spawn in the center of the screen:
-  - *Digital weeds detected in browser cache*
-  - *Scarecrow re-authentication required*
-  - *John Deere tractor DRM breach*
-  - *Ammonia vapor venting from monitor*
-- **Hydra Close Button**: The microscopic 9px `[X]` button spawns **two additional popups** with an alarm siren instead of closing.
-
-### 4. 🌀 Text & Layout Irritation
-- Legitimate agronomic text on Photosystem II fluorometry, cation exchange capacity, and microbial nitrogen fixation.
-- Paragraphs shake violently, invert upside down (`rotate(180deg)`), scramble their interior letters into dynamic anagrams, or switch to Papyrus/Comic Sans on hover.
-- **Obnoxious Cursor**: Replaced with an oversized bouncing tractor & corn cob with an offset crosshair and an occluding 12-particle blur trail.
-
-### 5. 🍪 Additional Traps
-- **Form Traps**: Inputs randomly append corn emojis (`🌽`), sliders decay backward to 0% when dragged, and a red *"INSTANTLY WIPE ALL DATA"* button tempts frustrated users.
-- **Cookie Consent Hell**: Parody GDPR banner requiring manual verification for 48,000 agricultural cookies with an evasive "Accept All" button and a punitive "Reject All" button.
-- **Audio "Mute" Button**: Actually amplifies audio to 250% for *"crop stimulation"*.
+- **Frontend & App Framework:** [Streamlit](https://streamlit.io/)
+- **Database:** SQLite (`data/invoiceiq.db`) with relational integrity and audit trail
+- **Data Manipulation:** Pandas
+- **Document Ingestion & OCR/Parsing:** `pdfplumber` (text PDFs) & `PyMuPDF` (scanned/image rendering)
+- **AI Extraction & Reasoning:** Groq SDK
+  - Text PDFs: `llama-3.3-70b-versatile` in JSON mode, temperature 0
+  - Scanned/Image PDFs: `meta-llama/llama-4-scout-17b-16e-instruct` in JSON mode, temperature 0
+  - Decision Reasoning: 2-sentence plain-English explanations & tailored vendor communications
+- **Invoice PDF Generation:** `reportlab`
+- **Environment Management:** `python-dotenv`
 
 ---
 
-## 🛠️ Tech Stack
+## 🚀 Quickstart & Run Instructions
 
-- **React 19**
-- **Tailwind CSS 3**
-- **Vite 5**
-- **Web Audio API** (Pure synthetic sound generation: square, saw, triangle waves)
-- **Lucide Icons**
+### 1. Prerequisites
+- Python 3.10+ (Python 3.11 recommended)
+
+### 2. Install Dependencies
+```bash
+pip install -r requirements.txt
+```
+
+### 3. Configure API Key
+Create or edit `.env` in the root folder:
+```env
+GROQ_API_KEY=gsk_your_groq_api_key_here
+```
+*(Note: Never commit or hardcode API keys. If no key is set, the app will automatically use its internal high-fidelity deterministic fallback engine so all features remain testable.)*
+
+### 4. Generate Demo Data (Invoices & Reference CSVs)
+```bash
+python generate_demo_data.py
+```
+This generates `data/vendors.csv`, `data/po_data.csv`, and 6 realistic test invoices in `/demo_invoices`.
+
+### 5. Launch the Web Application
+```bash
+streamlit run app.py
+```
+Open your browser at `http://localhost:8501`.
 
 ---
 
-## 🚀 Getting Started
+## 📑 Application Pages
 
-### 1. Install Dependencies
-```bash
-npm install
-```
+1. **📂 Upload:**
+   - Drag-and-drop any vendor PDF or select any demo scenario.
+   - Real-time extraction with color-coded confidence indicators (Green `>0.9`, Amber `0.7–0.9`, Red `<0.7`).
+   - Displays Decision Badge, highlighted reason box, findings breakdown, and pre-composed vendor email.
+   - SHA-256 caching ensures repeat uploads make 0 external API calls.
 
-### 2. Run Locally
-```bash
-npm run dev
-```
-Open [http://localhost:5173/](http://localhost:5173/) in your browser.
+2. **📥 Approver Inbox:**
+   - Human-in-the-loop review queue for invoices flagged as `NEEDS_REVIEW`.
+   - Side-by-side discrepancy review with line-item 3-way match.
+   - **Approve Button:** Posts directly to the ERP ledger with status "Posted".
+   - **Reject Button:** Prompts for a reason and logs rejection to the audit trail.
 
-### 3. Build for Production
-```bash
-npm run build
-```
-Preview the production build:
-```bash
-npm run preview
-```
+3. **📑 ERP Ledger:**
+   - Live General Ledger table of all posted invoices.
+   - Displays payment references (`PAY-YYYYMMDD-XXXX`), line-item totals, and timestamps.
+   - Search by vendor or invoice number with one-click CSV export.
+
+4. **🔍 Audit Log:**
+   - Immutable compliance trail recording every stage: `UPLOAD`, `EXTRACTION`, `VALIDATION`, `DECISION`, `APPROVAL`, `REJECTION`, and `LEDGER`.
+   - Filterable by stage, invoice number, and actor.
+
+5. **📊 Dashboard:**
+   - Key operational metrics: Total Invoices Processed, % Touchless Rate, Blocked Count, Needs Review Count.
+   - Average processing velocity (e.g. 0.05s cached / ~2s live).
+   - Estimated **Time Saved** (assuming 20 min manual vs 10 sec automated) and **Money Saved** (Rs 600 manual vs Rs 40 automated).
+   - Interactive bar chart of decision distributions.
+   - **"Load demo invoices"** button: Automatically processes all 6 demo invoices in sequence.
+   - **"Reset demo"** button: Clears operational tables and reseeds reference vendors and POs.
+
+---
+
+## 🧪 Demo Invoices Suite
+
+| File | Scenario | Expected Outcome | Failure Reason / Note |
+|---|---|---|---|
+| `01_clean_invoice.pdf` | Clean Invoice | **AUTO_APPROVED** | 100% match on PO, GRN, 18% GST, and registered bank. Posted to ledger. |
+| `02_quantity_mismatch_invoice.pdf` | Quantity Mismatch | **NEEDS_REVIEW** | Invoiced 120 units, but warehouse GRN recorded only 100 received. |
+| `03_duplicate_invoice.pdf` | Duplicate Submission | **BLOCKED** | Same vendor, same total (INR 59,000), date within 30 days, invoice number similarity > 85%. |
+| `04_fraud_bank_mismatch_invoice.pdf` | Bank Fraud Alert | **BLOCKED** | Invoiced bank account does not match registered master vendor bank. |
+| `05_tax_error_invoice.pdf` | Tax Calculation Error | **NEEDS_REVIEW** | Invoiced GST is 10% instead of standard 18% GST (difference > Rs 1). |
+| `06_messy_layout_invoice.pdf` | Messy Layout & Typography | **AUTO_APPROVED** | Different font/layout and total in words, but math and PO match cleanly. |

@@ -1,0 +1,6 @@
+po_number,vendor_name,item,ordered_qty,received_qty,unit_price
+PO-2024-001,Acme Tech Solutions,Enterprise Cloud Server Blades,10,10,5000.0
+PO-2024-002,Bharat Industrial Supplies,Heavy Duty Industrial Bearings,120,100,250.0
+PO-2024-004,Cybertron Logistics,Express Freight Units,50,50,1200.0
+PO-2024-005,Zenith Stationery Ltd,Executive Ergonomic Desk Chairs,20,20,2000.0
+PO-2024-006,Deccan Office Systems,Modular Office Workstations,8,8,2500.0
